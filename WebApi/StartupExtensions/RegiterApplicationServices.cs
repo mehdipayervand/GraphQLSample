@@ -1,6 +1,4 @@
-using Domain;
 using Domain.Data;
-using Infrastructure;
 using Infrastructure.Data;
 
 namespace WebApi.StartupExtensions;
@@ -11,6 +9,7 @@ public static class RegisterApplicationServices
     {
         services.AddSingleton<IOrderRepository, OrderRepository>();
         services.AddSingleton<ICustomerRepository, CustomerRepository>();
+        
 
 
     }

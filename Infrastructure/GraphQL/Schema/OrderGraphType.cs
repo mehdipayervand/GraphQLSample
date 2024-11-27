@@ -12,7 +12,7 @@ public sealed class OrderGraphType : ObjectGraphType<Order>
         Field(c => c.Id);
         Field(c => c.Name);
         Field(c => c.Description);
-        Field<CustomerGraphType>("customer").Resolve(context =>customerRepository.GetCustomerById(context.Source.CustomerId));
+        Field<CustomerGraphType>("customer",resolve:context =>customerRepository.GetCustomerById(context.Source.CustomerId));
         Field(c => c.Created);
     }
 }

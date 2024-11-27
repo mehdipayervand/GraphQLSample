@@ -1,3 +1,4 @@
+using GraphQL.Types;
 using WebApi.StartupExtensions;
 
 namespace WebApi;
@@ -11,6 +12,7 @@ public class Program
         // Add services to the container.
         builder.Services.ConfigureMongoDB(builder.Configuration);
         builder.Services.ConfigureApplicationServices(builder.Configuration);
+        builder.Services.ConfugureApplicationGraphQLServices(builder.Configuration);
 
         //builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,11 +24,15 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             //
+            app.UseGraphQLAltair();
         }
 
         //app.UseHttpsRedirection();
         //app.UseAuthorization();
         //app.MapControllers();
+
+        app.UseWebSockets();
+        app.UseGraphQL<ISchema>();
 
         app.Run();
     }

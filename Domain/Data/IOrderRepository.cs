@@ -4,6 +4,6 @@ namespace Domain.Data;
 
 public interface IOrderRepository
 {
-    Task<Order> GetOrderByIdAsync(string id);
+    Task<Order> GetOrderByIdAsync(int orderId);
     Task<IEnumerable<Order>> GetOrdersAsync();
 }

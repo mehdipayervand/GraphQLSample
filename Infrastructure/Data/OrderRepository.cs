@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace Infrastructure.Data;
 
-public class OrderRepository:IOrderRepository 
+public class OrderRepository : IOrderRepository
 {
     private readonly IMongoDatabase mongoDatabase;
 
@@ -12,29 +12,29 @@ public class OrderRepository:IOrderRepository
     {
         this.mongoDatabase = mongoDatabase;
     }
-    
-    
-    public Task<Order> GetOrderByIdAsync(string id)
+
+
+    public Task<Order> GetOrderByIdAsync(int id)
     {
         var collection = getCollection();
 
-        var order =  collection.Find(s=> s.Id == id).FirstOrDefault();
-        
+        var order = collection.Find(s => s.Id == id).FirstOrDefault();
+
         return Task.FromResult(order);
     }
 
     public Task<IEnumerable<Order>> GetOrdersAsync()
     {
         var collection = getCollection();
-        
+
         var filter = Builders<Order>.Filter.Empty;
 
-        var orders =  collection.FindSync(filter).ToEnumerable();
-        
+        var orders = collection.FindSync(filter).ToEnumerable();
+
         return Task.FromResult(orders);
     }
-    
-    
+
+
     private IMongoCollection<Order> getCollection()
     {
         return mongoDatabase.GetCollection<Order>(nameof(Order));
