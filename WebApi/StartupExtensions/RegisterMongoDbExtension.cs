@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
@@ -16,7 +17,6 @@ public static class RegisterMongoDbExtension
         services.AddSingleton(mongoDatabase);
         
         BsonSerializer.RegisterSerializer(new GuidSerializer());
-
         
     }
 }
@@ -30,7 +30,17 @@ public class GuidSerializer : SerializerBase<Guid>
 
     public override Guid Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        var objectId = context.Reader.ReadObjectId();
-        return new Guid(objectId.ToByteArray());
+        if (context.Reader.CurrentBsonType == BsonType.ObjectId)
+        {
+            var objectId = context.Reader.ReadObjectId();
+            return new Guid(objectId.ToByteArray());
+        }
+        else if (context.Reader.CurrentBsonType == BsonType.String)
+        {
+            var stringValue = context.Reader.ReadString();
+            return Guid.Parse(stringValue);
+        }
+
+        throw new InvalidOperationException($"Cannot deserialize Guid from BsonType {context.Reader.CurrentBsonType}");
     }
 }

@@ -13,12 +13,12 @@ public class CustomerRepository : ICustomerRepository
         this.mongoDatabase = mongoDatabase;
     }
     
-    public Customer GetCustomerById(int id)
+    public Customer GetCustomerById(Guid id)
     {
         return GetCustomerByIdAsync(id).Result;
     }
 
-    public Task<Customer> GetCustomerByIdAsync(int id)
+    public Task<Customer> GetCustomerByIdAsync(Guid id)
     {
         var collection = getCollection();
 

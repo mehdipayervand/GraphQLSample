@@ -14,7 +14,7 @@ public class OrderRepository : IOrderRepository
     }
 
 
-    public Task<Order> GetOrderByIdAsync(int id)
+    public Task<Order> GetOrderByIdAsync(Guid id)
     {
         var collection = getCollection();
 
@@ -32,6 +32,13 @@ public class OrderRepository : IOrderRepository
         var orders = collection.FindSync(filter).ToEnumerable();
 
         return Task.FromResult(orders);
+    }
+
+    public void InsertOrder(Order order)
+    {
+        var collection = getCollection();
+        
+        collection.InsertOne(order);
     }
 
 

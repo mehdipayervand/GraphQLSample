@@ -7,12 +7,14 @@ public class Customer
 {
     [BsonId]
     public ObjectId MongoId { get; set; }
-    public int Id { get; }
+
+    [BsonElement("Id")]
+    public Guid Id { get; set; }
     public string Name { get; set; }
 
-    public Customer(int id, string name)
+    public Customer(string name)
     {
-        Id = id;
+        Id = Guid.NewGuid();
         Name = name;
     }
 }

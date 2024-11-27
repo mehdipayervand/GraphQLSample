@@ -8,19 +8,21 @@ public class Order
     [BsonId]
     public ObjectId MongoId { get; set; }
 
-    public int Id { get; set; }
+    [BsonElement("Id")]
+    public Guid Id { get; set; }
+    
     public string Name { get; set; }
-    public string Description { get; set;}
+    public string Description { get; set; }
     public DateTime Created { get; private set; }
-    public int CustomerId { get; set; }
+    public Guid CustomerId { get; set; }
     public OrderStatutes Statutes { get; set; }
 
-    public Order(int id, string name,string description, DateTime created,int customerId)
+    public Order(string name, string description, Guid customerId)
     {
-        Id = id;
+        Id = Guid.NewGuid();
         Name = name;
         Description = description;
-        Created = created;
+        Created = System.DateTime.UtcNow;
         CustomerId = customerId;
         Statutes = OrderStatutes.Created;
     }
