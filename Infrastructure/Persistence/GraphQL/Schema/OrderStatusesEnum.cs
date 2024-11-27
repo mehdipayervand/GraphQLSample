@@ -1,6 +1,6 @@
 using GraphQL.Types;
 
-namespace Infrastructure.GraphQL.Schema;
+namespace Infrastructure.Persistence.GraphQL.Schema;
 
 public class OrderStatusesEnum : EnumerationGraphType
 {

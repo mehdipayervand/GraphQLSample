@@ -1,5 +1,5 @@
 using Domain.Data;
-using Infrastructure.Data;
+using Infrastructure.Persistence.Mongo;
 
 namespace WebApi.StartupExtensions;
 

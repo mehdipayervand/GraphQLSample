@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.GraphQL.Schema;
+namespace Infrastructure.Persistence.GraphQL.Schema;
 
-public class OrdersSchema : global::GraphQL.Types.Schema
+public class OrderSchema : global::GraphQL.Types.Schema
 {
-    public OrdersSchema(IServiceProvider serviceProvider) : base(serviceProvider)
+    public OrderSchema(IServiceProvider serviceProvider) : base(serviceProvider)
     {
         Query = serviceProvider.GetRequiredService<OrdersQuery>();
         Mutation = serviceProvider.GetRequiredService<OrdersMutation>();

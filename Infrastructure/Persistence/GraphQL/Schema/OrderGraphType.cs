@@ -1,10 +1,9 @@
 using Domain.Data;
-using Domain.Model;
 using GraphQL.Types;
 
-namespace Infrastructure.GraphQL.Schema;
+namespace Infrastructure.Persistence.GraphQL.Schema;
 
-public sealed class OrderGraphType : ObjectGraphType<Order>
+public sealed class OrderGraphType : ObjectGraphType<Domain.Model.Order>
 {
 
     public OrderGraphType(ICustomerRepository customerRepository)
@@ -14,5 +13,6 @@ public sealed class OrderGraphType : ObjectGraphType<Order>
         Field(c => c.Description);
         Field<CustomerGraphType>("customer",resolve:context =>customerRepository.GetCustomerById(context.Source.CustomerId));
         Field(c => c.Created);
+        Field(c => c.Statutes);
     }
 }

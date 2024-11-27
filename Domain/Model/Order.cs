@@ -1,14 +1,11 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
 namespace Domain.Model;
 
 public class Order
 {
-    [BsonId]
-    public ObjectId MongoId { get; set; }
-
-    [BsonElement("Id")]
+    // [BsonId]
+    // public ObjectId MongoId { get; set; }
+    //
+    // [BsonElement("Id")]
     public Guid Id { get; set; }
     
     public string Name { get; set; }
@@ -22,7 +19,7 @@ public class Order
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
-        Created = System.DateTime.UtcNow;
+        Created = DateTime.UtcNow;
         CustomerId = customerId;
         Statutes = OrderStatutes.Created;
     }
