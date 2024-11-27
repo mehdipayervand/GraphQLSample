@@ -14,6 +14,7 @@ public class OrdersQuery : ObjectGraphType<object>
             "orders",
             resolve: context => orderRepository.GetOrdersAsync()
         );
+        
         Field<OrderGraphType>(
             "orderById",
             arguments: new QueryArguments(new QueryArgument<GuidGraphType>() { Name = "Id" }),
@@ -24,10 +25,12 @@ public class OrdersQuery : ObjectGraphType<object>
             "customers",
             resolve: context => customerRepository.GetCustomersAsync()
         );
+        
         Field<OrderGraphType>(
             "customerById",
             arguments: new QueryArguments(new QueryArgument<GuidGraphType>() { Name = "Id" }),
             resolve: context => customerRepository.GetCustomerById(context.GetArgument<Guid>("id"))
         );
+        
     }
 }
