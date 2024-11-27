@@ -3,10 +3,6 @@ namespace Domain.Model;
 
 public class Customer
 {
-    // [BsonId]
-    // public ObjectId MongoId { get; set; }
-    //
-    // [BsonElement("Id")]
     public Guid Id { get; set; }
     public string Name { get; set; }
 
